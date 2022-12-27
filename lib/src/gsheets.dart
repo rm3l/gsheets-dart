@@ -77,9 +77,11 @@ class GSheets {
       SheetsApi.driveScope,
     ],
   })  : _externalClient = null,
-        _credentials = credentials,
-        _clientId = null,
-        _scopes = null;
+        _credentials = ServiceAccountCredentials(
+            credentials.email, credentials.clientId, credentials.privateKey,
+            impersonatedUser: impersonatedUser),
+        _clientId = credentials.clientId,
+        _scopes = scopes;
 
   /// Creates an instance of [GSheets] with custom client
   ///
